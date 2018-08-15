@@ -9,8 +9,8 @@
                 class="cascader"
                 expand-trigger="hover"
                 clearable
-                :options="options"
-                v-model="params"
+                :options="selectOption"
+                v-model="values"
                 @change="getParamter">
             </el-cascader>
         </div>
@@ -29,109 +29,47 @@ export default {
         imgURL: {
             type: String,
             default: '/static/img/default.png'
+        },
+        selectOption: {
+            type: Array,
+            default: []
+        },
+        selectedValue: {
+            type: Array,
+            default () {
+                return []
+            }
         }
     },
     data () {
         return {
             params: [],
-            options: [{
-                    value: 'GE',
-                    label: 'GE',
-                    children: [{
-                        value: '3.0T',
-                        label: '3.0T',
-                        children: [ {
-                            value: 'Signa HDxt',
-                            label: 'Signa HDxt'
-                        }]
-                    },{
-                        value: '1.5T',
-                        label: '1.5T',
-                        children: [{
-                            value: 'Signa HDx',
-                            label: 'Signa HDx'
-                        }]
-                    }]
-                },{
-                    value: 'Siemens',
-                    label: 'Siemens',
-                    children: [{
-                        value: '3.0T',
-                        label: '3.0T',
-                        children: [{
-                            value: 'MAGNETOM Verio',
-                            label: 'MAGNETOM Verio'
-                        }]
-                        },{
-                        value: '1.5T',
-                        label: '1.5T',
-                        children: [{
-                            value: 'MAGNETOM Avanto',
-                            label: 'MAGNETOM Avanto'
-                        }]
-                    }]
-                },{
-                    value: 'Philips',
-                    label: 'Philips',
-                    children: [{
-                        value: '3.0T',
-                        label: '3.0T',
-                        children: [{
-                            value: 'Ingenia',
-                            label: 'Ingenia'
-                        }]
-                    }]
-                },{
-                    value: '联影',
-                    label: '联影',
-                    children: [{
-                        value: '3.0T',
-                        label: '3.0T',
-                        children: [{
-                            value: 'uMR770',
-                            label: 'uMR770'
-                        },{
-                            value: '1.5T',
-                            label: '1.5T',
-                            children: [{
-                                value: 'uMR560',
-                                label: 'uMR560'
-                            }]
-                        }]
-                    }]
-                },{
-                    value: '东软',
-                    label: '东软',
-                    children: [{
-                        value: '1.5T',
-                        label: '1.5T',
-                        children: [{
-                            value: 'NSM-15P',
-                            label: 'NSM-15P'
-                        }]
-                    }]
-                },{
-                    value: '奥泰',
-                    label: '奥泰',
-                    children: [{
-                        value: '1.5T',
-                        label: '1.5T',
-                        children: [{
-                            value: 'Centauri',
-                            label: 'Centauri'
-                        }]
-                    }]
-            }]
         }
     },
     computed: {
         imgUrl () {
             return this.imgURL
-        }
+        },
+        values: {
+            get () {
+                // 深拷贝
+                let current = JSON.parse(JSON.stringify(this.selectedValue))
+                return current
+            },
+            set (value) {
+                // 深拷贝
+                let current = value || JSON.parse(JSON.stringify(this.selectedValue))
+                return current
+            }
+        },
     },
     methods: {
         getParamter (data) {
-            this.$emit('getParams', data)
+            let optionInfo = {
+                data: data,
+                index: this.colIndex
+            }
+            this.$emit('getParams', optionInfo)
         },
         arrowHandler (dir) {
             let moveInfo = {

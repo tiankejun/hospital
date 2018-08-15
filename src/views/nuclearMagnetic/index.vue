@@ -17,7 +17,12 @@
                 </div
             ></el-col>
             <el-col :span="6" v-for="(colData, colIndex) in colomData" :key="colIndex">
-                <Selection :colIndex="colIndex" :imgURL="colData.imgURL" @getParams="getParams" @moveData="moveData"></Selection>
+                <!-- :imgURL="colData.imgURL"  -->
+                <Selection :colIndex="colIndex" 
+                    :selectOption="selectOption" 
+                    :selectedValue="selectedValue[colIndex]"  
+                    @getParams="getParams" 
+                    @moveData="moveData"/>
                 <div class="grid-content">
                     <el-collapse v-model="activeNames" v-if="key !== 'imgURL'" v-for="(model, key, modelIndex) in colData" :key="colIndex + '-' + modelIndex"  @change="handleChange">
                         <el-collapse-item v-if="key !== 'imgURL'" :title="model.title" :name="key">
@@ -42,11 +47,26 @@ export default {
     },
     data () {
         return {
-            colomData: [],
-            colomTitle: [],
-            params: [],
+            colomData: [],  // 列数据
+            colomTitle: [], // 列名
+            selectedValue: [
+                ['', '', ''],
+                ['', '', ''],
+                ['', '', ''],
+                ['', '', ''],
+                ['', '', '']
+            ], // 下拉框展示数据
+            params: '', // 存储请求参数
+            tempData: {},
             hiddenSameItem: false,
             activeNames: ['MagnetSYS', 'RadiofrequencySYS', 'GradientSYS', 'SequenceInfor', 'ComputerSYS'],
+        }
+    },
+    computed: {
+        selectOption () {
+            let data = localStorage.getItem('Dictionary')
+            data = JSON.parse(localStorage.getItem('Dictionary')) || []
+            return data
         }
     },
     created () {
@@ -58,16 +78,18 @@ export default {
         getModelData () {
             return new Promise((resolve, reject) => {
                 apis.getModelData().then(res => {
-                    this.colomData = res
+                    this.tempData = res[0]
+                    for (let i = 0; i < 5; i++) {
+                        this.colomData.push(this.tempData)
+                    }
                     resolve()
                 })
             })
         },
         // 根据参数获取列数据
-        getData () {
-            this.params = ['22', '23']
+        getData (index) {
             let params = {
-                modelIds: this.params.join(',')
+                modelIds: this.params
             }
             return new Promise((resolve, reject) => {
                 apis.getColData(params).then(res => {
@@ -76,13 +98,10 @@ export default {
                         this.colomData = res.splice(0)    
                     } else {
                     // 否则将返回的数据按顺序插入到模板数据的头部
-                        if (res.length) {
-                            // 先删除返回数据的长度
-                            this.colomData.splice(0, res.length)
-                            res.forEach(item => {
-                                this.colomData.unshift(item)    
-                            })
-                        }
+                    if (res.length) {
+                        // 先删除返回数据的长度
+                        this.colomData.splice(index, 1, res[0])
+                    }
                     }
                     resolve()
                 })
@@ -101,16 +120,22 @@ export default {
         hiddenSameItemFn (flag) {
             this.hiddenSameItem = flag
             if (this.hiddenSameItem ) {
-                this.colomData = this.$tools.hideSameItem(this.data)
+                this.colomData = this.$tools.hideSameItem(this.colomData)
             } else {
-                this.colomData = this.$tools.resetList(this.data)
+                this.colomData = this.$tools.resetList(this.colomData)
             }
         },
         // 数据左右移动
         moveData (moveInfo) {
             let data = JSON.parse(JSON.stringify(moveInfo))
+            // 获取当前索引
             let currentIndex = data.index
+            // 获取当前索引对应的值
             let currentData = this.colomData[currentIndex]
+            // 当前选中的下拉框
+            let currentSelected = this.selectedValue[currentIndex]
+            // 要传给后台的值
+            let currentValue = this.params[currentIndex]
             if (moveInfo.dir === 'left') {
                 if (moveInfo.index === 0) {
                     return
@@ -124,12 +149,26 @@ export default {
             }
             this.colomData.splice(data.index, 1)
             this.colomData.splice(currentIndex, 0, currentData)
+            this.selectedValue.splice(data.index, 1)
+            this.selectedValue.splice(currentIndex, 0, currentSelected)
         },
         // 下拉框事件
-        getParams (val) {
-            console.log('test', val)
-            // this.params.push(val[val.length-1])
-            this.getData()
+        getParams (optionInfo) {
+            // console.log('test', optionInfo)
+            let data = optionInfo.data
+            let index = optionInfo.index
+            // 如果有值，则改变原数据， 否则，赋值为默认值
+            if (data.length) {
+                let modelId = data[2]
+                // 替换当前选择下拉框的值，index 为当前列索引
+                this.selectedValue.splice(index, 1, data)
+                this.params = modelId
+                this.getData(index)
+            } else {
+                // 删除后赋默认数据
+                this.colomData.splice(index, 1, this.tempData)
+                this.selectedValue.splice(index, 1, ['', '', ''])
+            }
         },
         // 收起，展开功能
         handleChange (val) {

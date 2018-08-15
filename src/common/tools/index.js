@@ -34,16 +34,9 @@ let hideSameItem = function (list) {
         if (keys[0] === 'imgURL') {
             keys = keys.splice(1)
         }
-        // console.log('keys--', keys)
+        console.log('keys--', keys)
         keys.forEach(key => {
             let fields = colData[key].fields
-            // let fieldsKeys = Object.keys(fields)
-            // fieldsKeys.forEach(fieldsKey => {
-            //     paths.push({
-            //         path:[key, 'fields', fieldsKey],
-            //         flag: false,    // 占位符，后面会进行计算
-            //     })
-            // })
             fields.forEach((field, index) => {
                 paths.push({
                     path:[key, 'fields', field.key],
@@ -64,7 +57,7 @@ let hideSameItem = function (list) {
      *      ...
      * ]
      */
-    function processList (paths) {        
+    function processList (paths) {     
         paths.forEach(item => {
             let tempPath = JSON.parse(JSON.stringify(item.path))
             // 根据对比结果重新赋值，所有列对应的行相等，则为true，不相等则为false
@@ -87,10 +80,12 @@ let hideSameItem = function (list) {
         // 先获取第一列的值，在循环获取其他列的值，拿第一列的值与下面的每一列进行比较，如果不相等，则返回false
         list.forEach(item => {
             field = getValueByPath(path, item)
-            if (!value) {
-                value = field.value
-            } else if (value !== field.value) {
-                flag = false
+            if (field.value) {
+                if (!value) {
+                    value = field.value
+                } else if (value !== field.value) {
+                    flag = false
+                }
             }
         })
         return flag
