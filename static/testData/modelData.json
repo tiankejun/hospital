@@ -38,7 +38,7 @@
             "id": 10,
             "title": "磁场均匀度（V-RMS）10cm DSV",
             "parentId": 1,
-            "key": "agneticUniformity2",
+            "key": "AgneticUniformity2",
             "sort": 4,
             "isEqual": false,
             "value": "",

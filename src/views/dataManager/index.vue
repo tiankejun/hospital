@@ -1,28 +1,25 @@
 <template>
-    <div>TEST2
-        <div v-for="(item, index) in test" :key="index">
-            <!-- <Selection :index="index"></Selection> -->
-            <test :test="index"></test>
-        </div>
-    </div>
+    <router-view></router-view>
 </template>
 <script>
-import Selection from '@/components/selection'
-import test from './test'
 export default {
-    name: 'dataManager',
-    components: {
-        test,
-        Selection
-    },
+    name: 'DataManager',
     data () {
         return {
-            test: [1,2,3,4,5]
+            
         }
     },
     methods: {
-
+        
     }
 }
 </script>
+<style lang="less">
+.base-data, .device-data {
+    width: 100%;
+    padding: 0 20px 20px;
+}
+</style>
+
+
 

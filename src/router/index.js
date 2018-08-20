@@ -9,6 +9,7 @@ import store from '@/store'
 
 import Error from './error'
 import NuclearMagnetic from './nuclearMagnetic'
+import DataManager from './dataManager'
 import TEST1 from './test1'
 import TEST2 from './test2'
 import TEST3 from './test3'
@@ -18,6 +19,7 @@ Vue.use(Router)
 const router = new Router({
     routes: [
         ...NuclearMagnetic,
+        ...DataManager,
         ...TEST1,
         ...TEST2,
         ...TEST3,
@@ -27,6 +29,7 @@ const router = new Router({
 
 let MenuList = [
     ...NuclearMagnetic,
+    ...DataManager,
     ...TEST1,
     ...TEST2,
     ...TEST3,
