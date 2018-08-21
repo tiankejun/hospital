@@ -38,7 +38,11 @@
     
 </template>
 <script>
-import apis from '@/api'
+import {
+    getModelData,
+    getColData,
+    getColName,
+ } from '@/api'
 import Selection from '@/components/selection.vue'
 export default {
     name: 'NuclearMagnetic',
@@ -77,7 +81,7 @@ export default {
         // 获取模型数据
         getModelData () {
             return new Promise((resolve, reject) => {
-                apis.getModelData().then(res => {
+                getModelData().then(res => {
                     this.tempData = res[0]
                     for (let i = 0; i < 5; i++) {
                         this.colomData.push(this.tempData)
@@ -92,16 +96,16 @@ export default {
                 modelIds: this.params
             }
             return new Promise((resolve, reject) => {
-                apis.getColData(params).then(res => {
-                    // 如果  模版数据的长度 ＝＝＝ 返回数据的长度 则直接赋值
-                    if (this.colomData.length === res.length) {
-                        this.colomData = res.splice(0)    
-                    } else {
-                    // 否则将返回的数据按顺序插入到模板数据的头部
-                    if (res.length) {
-                        // 先删除返回数据的长度
-                        this.colomData.splice(index, 1, res[0])
-                    }
+                getColData(params).then(res => {
+                    if (res.data && res.data.length) {
+                        // 如果  模版数据的长度 ＝＝＝ 返回数据的长度 则直接赋值
+                        if (this.colomData.length === res.data.length) {
+                            this.colomData = res.data.splice(0)    
+                        } else {
+                            // 否则将返回的数据按顺序插入到模板数据的头部
+                            // 先删除返回数据的长度
+                            this.colomData.splice(index, 1, res.data[0])
+                        }
                     }
                     resolve()
                 })
@@ -110,8 +114,10 @@ export default {
         // 获取列名
         getColName () {
             return new Promise((resolve, reject) => {
-                apis.getColName().then(res => {
-                    this.colomTitle = res
+                getColName().then(res => {
+                    if (res.data && res.data.length) {
+                        this.colomTitle = res.data
+                    }
                     resolve()
                 })
             })

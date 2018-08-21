@@ -1,7 +1,7 @@
 export default [
     {
         router: '/',
-        title: '磁共振数据管理',
+        title: '首页',
         name: '',
         icon: 'icon-electrocardio',
         component: 'Home',
@@ -13,23 +13,23 @@ export default [
         icon: 'icon-data',
         component: 'NuclearMagnetic'
     },
-    {
-        router: '/test2',
-        title: '磁共振用户管理',
-        name: '',
-        icon: 'icon-admin',
-        component: 'test2'
-    },
-    {
-        router: '/test3',
-        title: '磁共振医院管理',
-        name: '',
-        icon: 'icon-hospital',
-        component: 'test3'
-    },
+    // {
+    //     router: '/test2',
+    //     title: '磁共振用户管理',
+    //     name: '',
+    //     icon: 'icon-admin',
+    //     component: 'test2'
+    // },
+    // {
+    //     router: '/test3',
+    //     title: '磁共振医院管理',
+    //     name: '',
+    //     icon: 'icon-hospital',
+    //     component: 'test3'
+    // },
     {
         router: '/DataManager',
-        title: '磁共振医院管理',
+        title: '磁共振数据管理',
         name: '',
         icon: '',
         component: 'test3',

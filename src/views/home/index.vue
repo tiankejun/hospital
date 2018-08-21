@@ -2,7 +2,9 @@
     <div>首页</div>
 </template>
 <script>
-import apis from '@/api'
+import {
+    getDictionary,
+ } from '@/api'
 export default {
     name: 'Home',
     data () {
@@ -11,9 +13,11 @@ export default {
         }
     },
     created () {
-        apis.getDictionary().then(res => {
-            let data = res && JSON.stringify(res)
-            localStorage.setItem('Dictionary', data)
+        getDictionary().then(res => {
+            if (res.data && res.data.length) {
+                let data = res && JSON.stringify(res.data)
+                localStorage.setItem('Dictionary', data)
+            }
         })
     },
     methods: {
