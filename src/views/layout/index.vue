@@ -5,33 +5,9 @@
         </div>
         <el-switch class="switch" v-model="sideFull" @change="changeScreen"/>
         <div class="side-bar-menue">
-            <!-- <ul class="menue-list">
-                <li 
-                    class="menue"
-                    v-if="MenuList.length"
-                    v-for="(item, index) in MenuList"
-                    :key="index">
-                    <router-link :to="item.router">
-                        <div :class="{current: $route.path === item.router}">
-                            <i :class="['icon', item.icon]" v-if="!sideFull"></i>
-                            <div v-if="sideFull">{{item.title}}</div> 
-                        </div>
-                        <ul class="child-menue-list" v-show="item.children" v-if="item.children && item.children.length">
-                            <li class="child-menue" v-for="(child, index) in item.children" :key="index">
-                                <router-link :to="child.router">
-                                    <div :class="{childCurrent: $route.path === child.router}">
-                                        <i :class="['icon', item.icon]" v-if="!sideFull"></i>
-                                        <div v-if="sideFull">{{child.title}}</div>
-                                    </div>
-                                </router-link>
-                            </li>
-                        </ul>
-                    </router-link>
-                </li>
-            </ul> -->
             <el-menu class="el-menu-vertical-demo" 
                 router
-                text-color="#F9F9F9"
+                text-color="#FFF"
                 background-color="#2e3d51"
                 active-text-color="#409EFF"
                 :default-active="$route.path" 
@@ -41,7 +17,7 @@
                 <div v-for="(item, index) in MenuList" :key="index">
                     <el-submenu :index="item.router" v-if="item.children && item.children.length">
                         <template slot="title">
-                            <i class="el-icon-location"></i>
+                            <i class="el-icon-setting" ></i>
                             <span slot="title">{{item.title}}</span>
                         </template>
                         <el-menu-item :index="child.router"  v-for="(child, childIndex) in item.children" :key="childIndex" >
