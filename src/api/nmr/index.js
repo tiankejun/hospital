@@ -1,32 +1,39 @@
+import axios from 'axios'
 import fatch from '../fatch'
 let testURL = '../../static'
 
 /**
- * 获取列表
+ * 获取字典数据
+ * @param  {Object} param 数据筛选参数
+ * @return {Object}       Promise
  */
-// export function getColName () {
-//     return fatch.get(testURL + '/testData/colomn.json')
-// }
-
-let getModelData = function () {
-    return fatch.get(testURL + '/testData/modelData.json')
+export function getDictionary (param) {
+    return axios.post('/nmr//api/conds/all', param)
 }
 
-let getColName = function (params) {
-    return fatch.post('/nmr/api/args/columns', params)
+/**
+ * 获取卡号列表
+ * @param  {Object} param 数据筛选参数
+ * @return {Object}       Promise
+ */
+export function getModelData (param) {
+    return fatch.get('/static/testData/modelData.json', param)
 }
 
-let getColData = function (params) {
-    return fatch.post('/nmr/api/args/vals', params)
+/**
+ * 获取列头
+ * @param  {Object} param 数据筛选参数
+ * @return {Object}       Promise
+ */
+export function getColName (param) {
+    return axios.post('/nmr/api/args/columns', param)
 }
 
-let getDictionary = function (params) {
-    return fatch.post('/nmr//api/conds/all', params)
-}
-
-export default {
-    getModelData,
-    getColName,
-    getColData,
-    getDictionary,
+/**
+ * 获取数据
+ * @param  {Object} param 数据筛选参数
+ * @return {Object}       Promise
+ */
+export function getColData (param) {
+    return axios.post('/nmr/api/args/vals', param)
 }
