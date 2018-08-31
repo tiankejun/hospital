@@ -5,7 +5,7 @@
         </div>
         <el-switch class="switch" v-model="sideFull" @change="changeScreen"/>
         <div class="side-bar-menue">
-            <ul class="menue-list">
+            <!-- <ul class="menue-list">
                 <li 
                     class="menue"
                     v-if="MenuList.length"
@@ -28,27 +28,32 @@
                         </ul>
                     </router-link>
                 </li>
-            </ul>
-            <!-- <el-menu
-                default-active="2"
-                class="menu"
-                @open="handleOpen"
-                @close="handleClose"
-                mode="vertical"
-                :collapse="sideFull"
-                background-color="#545c64"
-                text-color="#fff"
-                active-text-color="#ffd04b">
-                <el-submenu index="1">
-                    <template slot="title" > 
-                        <i class="el-icon-location"></i>
-                        <span>导航一</span>
-                    </template>
-                    <el-menu-item-group title="分组2">
-                        <el-menu-item index="1-3">选项3</el-menu-item>
-                    </el-menu-item-group>
-                </el-submenu>
-            </el-menu> -->
+            </ul> -->
+            <el-menu class="el-menu-vertical-demo" 
+                router
+                text-color="#F9F9F9"
+                background-color="#2e3d51"
+                active-text-color="#409EFF"
+                :default-active="$route.path" 
+                :collapse="isCollapse" 
+                @open="handleOpen" 
+                @close="handleClose">
+                <div v-for="(item, index) in MenuList" :key="index">
+                    <el-submenu :index="item.router" v-if="item.children && item.children.length">
+                        <template slot="title">
+                            <i class="el-icon-location"></i>
+                            <span slot="title">{{item.title}}</span>
+                        </template>
+                        <el-menu-item :index="child.router"  v-for="(child, childIndex) in item.children" :key="childIndex" >
+                            {{child.title}}
+                        </el-menu-item>
+                    </el-submenu>
+                    <el-menu-item :index="item.router" v-else >
+                        <i class="el-icon-menu"></i>
+                        <span slot="title">{{item.title}}</span>
+                    </el-menu-item>
+                </div>  
+            </el-menu>
         </div>
     </div>
 </template>
@@ -60,6 +65,7 @@ export default {
     data () {
         return {
             sideFull: true,
+            isCollapse: false,
             MenuList: routers,
         }
     },
@@ -74,13 +80,30 @@ export default {
     methods: {
         changeScreen (value) {
             this.sideFull = value
+             this.isCollapse = !value
         },
-        handleOpen () {},
-        handleClose () {},
+        handleOpen(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        handleClose(key, keyPath) {
+            console.log(key, keyPath);
+        }
     }
 }
 </script>
 <style lang="less">
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+  .el-menu--collapse>div>.el-menu-item span, .el-menu--collapse>div>.el-submenu>.el-submenu__title span {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    visibility: hidden;
+    display: inline-block;
+  }
+
 .sideSystem-full, .sideSystem-mini {
     background: #2e3d51;
     overflow: auto;
@@ -91,10 +114,6 @@ export default {
 }
 .sideSystem-full { width: 180px;}
 .sideSystem-mini { width: 46px;}
-// .menu:not(.el-menu--collapse) {
-//     width: 46px;
-//     min-height: 40px;
-//   }
 .side-bar {
     .full-logo { 
         width: 100px; 
@@ -111,45 +130,10 @@ export default {
         background: indianred;
     }
     .switch {margin: 20px auto;}
-    .side-bar-menue, .menue-list, .menue {
-        display: block;
-        .menue a {
-            display: block;
-            // height: 40px;
-            font-size: 14px;
-            line-height: 40px;
-            text-decoration: none;
-            color: #FFF;
-            border-left: 3px solid #2e3d51;
-        }
-        .menue .current { background: #273446; border-left: 3px solid #4b9de6;}
-
-        .child-menue-list {
-            display: block;
-            .child-menue a {
-                display: block;
-                line-height: 35px;
-                padding-left: 5px;
-                font-size: 12px;
-                border-left: 1px solid #2e3d51
-            }
-            .childCurrent {
-                background: #273446; border-left: 1px solid #4b9de6
-            }
-        }
-    }
-    .icon {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-    }
-    .icon-electrocardio {background-image: url(../../../static/img/electrocardio.png);}
-    .icon-data {background-image: url(../../../static/img/data.png);}
-    .icon-admin {background-image: url(../../../static/img/admin.png);}
-    .icon-hospital {background-image: url(../../../static/img/hospital.png);}
+    // .icon-electrocardio {background-image: url(../../../static/img/electrocardio.png);}
+    // .icon-data {background-image: url(../../../static/img/data.png);}
+    // .icon-admin {background-image: url(../../../static/img/admin.png);}
+    // .icon-hospital {background-image: url(../../../static/img/hospital.png);}
     
 }
 
