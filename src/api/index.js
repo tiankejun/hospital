@@ -1,1 +1,2 @@
-export * from './nmr'
+export * from './dataManager'
+export * from './nuclearMagnetic'
