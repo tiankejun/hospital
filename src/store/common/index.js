@@ -5,12 +5,16 @@
  */
 
 const state = {
-    MenuList: []
+    MenuList: [],
+    ModelId: '',
 }
 
 const mutations = {
     UPDATE_MENULIST (state, value) {
         state.MenuList = value
+    },
+    UPDATE_MODELID (state, value) {
+        state.ModelId = value
     },
 }
 
@@ -18,6 +22,9 @@ const actions = {
     // 接受数组参数，替换内容
     update_menuList ({commit}, value) {
         commit('UPDATE_MENULIST', value)
+    },
+    update_modelid ({commit}, value) {
+        commit('UPDATE_MODELID', value)
     },
 }
 

@@ -1,6 +1,6 @@
 import DataManager from '@/views/dataManager/index.vue'
-import BaseData from '@/views/dataManager/baseData.vue'
-import DeviceData from '@/views/dataManager/deviceData.vue'
+import BaseData from '@/views/dataManager/baseData/index.vue'
+import DeviceData from '@/views/dataManager/deviceData/index.vue'
 
 export default [{
     path: '/DataManager',

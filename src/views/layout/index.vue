@@ -68,9 +68,13 @@ export default {
 }
 </script>
 <style lang="less">
+.sideSystem-full { width: 200px;}
+.sideSystem-mini { width: 46px;}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
+    overflow: hidden;
+    border-right: none;
   }
   .el-menu--collapse>div>.el-menu-item span, .el-menu--collapse>div>.el-submenu>.el-submenu__title span {
     height: 0;
@@ -88,8 +92,6 @@ export default {
     -webkit-transition-duration: 300ms;
     transition-duration: 300ms;
 }
-.sideSystem-full { width: 180px;}
-.sideSystem-mini { width: 46px;}
 .side-bar {
     .full-logo { 
         width: 100px; 
