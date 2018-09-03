@@ -12,13 +12,13 @@
     </div>
 </template>
 <script>
-import list from './list.vue'
-import edit from './edit.vue'
+import List from './list.vue'
+import Edit from './edit.vue'
 export default {
     name: 'DeviceData',
     components: {
-        list,
-        edit,
+        List,
+        Edit,
     },
     data () {
         return {
@@ -26,7 +26,7 @@ export default {
             tabList: [{
                 title: '列表',
                 name: '1',
-                comName: 'list'
+                comName: 'List'
             }],
             tabIndex: 2
         }
@@ -45,13 +45,13 @@ export default {
                     this.tabList.push({
                         title: '新增',
                         name: '2',
-                        comName: 'edit'
+                        comName: 'Edit'
                     })
                 } else {
                     this.tabList.push({
                         title: '编辑',
                         name: '3',
-                        comName: 'edit'
+                        comName: 'Edit'
                     })
                 }
             }

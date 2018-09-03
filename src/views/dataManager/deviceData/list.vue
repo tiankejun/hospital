@@ -30,15 +30,15 @@
                 </template>
                 </el-table-column>
             </el-table>
-            <!-- <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page.sync="currentPage2"
+            <el-pagination
+                @size-change="sizeChange"
+                @current-change="currentChange"
+                :current-page="page.pageNum"
                 :page-sizes="[10, 20, 30, 50]"
-                :page-size="100"
+                :page-size="page.pageSize"
                 layout="sizes, prev, pager, next"
-                :total="1000">
-            </el-pagination> -->
+                :total="page.total">
+            </el-pagination>
         </div>
     </div>
 </template>
@@ -49,11 +49,15 @@ import {
     getDatalist,
  } from '@/api'
 export default {
-    name: 'DeviceData',
+    name: 'List',
     data () {
         return {
             params: {},
-            pages: {},
+            page: {
+                currentPage: 1,
+                pageSize: 10,
+                total: 0
+            },
             list: [],
         }
     },
@@ -71,12 +75,13 @@ export default {
         ]),
         getListData () {
             let params = {
-                currentpage: 1,
+                currentPage: 1,
                 pageSize: 10,
             }
             getDatalist(params).then(res => {
                 if (res.data.list) {
                     this.list = res.data.list || []
+                    this.page = res.data.page
                 }
             }).catch(res => {
                 console.log(res)
@@ -90,6 +95,14 @@ export default {
             }
             this.$emit('editData', 'add')
         },
+        sizeChange (pageSize) {
+            this.page.pageSize = pageSize
+            this.getListData()
+        },
+        currentChange (currentSize) {
+            this.page.currentPage = currentSize
+            this.getListData()
+        }
     }
 }
 </script>
