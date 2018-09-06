@@ -7,7 +7,7 @@ let testURL = '../../static'
  * @param  {Object} param 数据筛选参数
  * @return {Object}       Promise
  */
-export function getDatalist (param) {
+export function GetDatalistAPI (param) {
     return axios.post('/nmr/api/modelds/getpageList', param)
 }
 
@@ -16,7 +16,7 @@ export function getDatalist (param) {
  * @param  {Object} param 数据筛选参数
  * @return {Object}       Promise
  */
-export function addData (param) {
+export function AddDataAPI (param) {
     return axios.post('/nmr/api/records/args/add', param)
 }
 
@@ -25,6 +25,6 @@ export function addData (param) {
  * @param  {Object} param 数据筛选参数
  * @return {Object}       Promise
  */
-export function editorData (param) {
+export function EditorDataAPI (param) {
     return axios.post('/nmr/api/records/args/addoredit', param)
 }

@@ -7,6 +7,7 @@
 const state = {
     MenuList: [],
     ModelId: '',
+    entitydata: [],
 }
 
 const mutations = {
@@ -15,6 +16,9 @@ const mutations = {
     },
     UPDATE_MODELID (state, value) {
         state.ModelId = value
+    },
+    UPDATE_ENTITYDATA (state, value) {
+        state.entitydata = value
     },
 }
 
@@ -26,6 +30,9 @@ const actions = {
     update_modelid ({commit}, value) {
         commit('UPDATE_MODELID', value)
     },
+    update_entitydata ({commit}, value) {
+        commit('UPDATE_ENTITYDATA', value)
+    }
 }
 
 export default {
