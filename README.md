@@ -5,7 +5,7 @@
 ## Build Setup
 
 ``` bash
-＃clone project
+# clone project
 git clone https://github.com/tiankejun/hospital.git
 
 # install dependencies
