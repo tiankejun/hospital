@@ -10,7 +10,7 @@
             </div>
         </div>
         <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button @click="closeDialog">取 消</el-button>
             <el-button type="primary" @click="saveData">保 存</el-button>
         </span>
     </el-dialog>
@@ -50,6 +50,14 @@ export default {
         saveData () {
             AddDataAPI(this.entity).then(res => {
                 console.log(res.data)
+                if (res.data.code) {
+                    this.$message({
+                        message: '保存成功！',
+                        type: 'success'
+                    })
+                } else {
+                    this.$message.error('保存失败！');
+                }
             }).catch(res => {
                 console.log(res)
             })
@@ -61,7 +69,9 @@ export default {
             this.dialogVisible = true
         },
         closeDialog () {
-            this.dialogVisible = false
+            this.$confirm('确认关闭？').then(_ => {
+                this.dialogVisible = false
+            }).catch(_ => {});
         }
     }
 }
