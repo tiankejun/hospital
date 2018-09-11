@@ -67,22 +67,16 @@ export default {
             page: {
                 currentPage: 1,
                 pageSize: 10,
-                total: 0
+                total: 0,
+                username: 'nmr',
+                sign: 'b450d420a636973390cfbc3ca3634084'
             },
         }
     },
-    // computed: {
-    //     ...mapState('common', [
-    //         'entityData'
-    //     ])
-    // },
     mounted () {
         this.getListData()
     },
     methods: {
-        // ...mapActions('common', [
-        //     'update_entitydata',
-        // ]),
         getListData () {
             GetDatalistAPI(this.page).then(res => {
                 if (res.data.list) {
@@ -109,7 +103,6 @@ export default {
                     this.entityData.forEach(item => {
                         item.modelId = modelId
                     })
-                    // this.update_entitydata(entityData)
                     this.$refs.Edit.showDialog()
                 }
             }).catch(res => {

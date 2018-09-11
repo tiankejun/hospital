@@ -7,7 +7,7 @@ let testURL = '../../static'
  * @param  {Object} param 数据筛选参数
  * @return {Object}       Promise
  */
-export function getDictionary (param) {
+export function GetDictionaryAPI (param) {
     return axios.post('/nmr//api/conds/all', param)
 }
 

@@ -6,19 +6,23 @@
 
 const state = {
     MenuList: [],
-    ModelId: '',
-    entitydata: [],
+    Dictionary: [],
+    SpecsData: [],
+    ManusData: [],
 }
 
 const mutations = {
     UPDATE_MENULIST (state, value) {
         state.MenuList = value
     },
-    UPDATE_MODELID (state, value) {
-        state.ModelId = value
+    UPDATE_DICTIONARY (state, value) {
+        state.Dictionary = value
     },
-    UPDATE_ENTITYDATA (state, value) {
-        state.entitydata = value
+    UPDATE_SPECSDATA (state, value) {
+        state.SpecsData = value
+    },
+    UPDATE_MANUSDATA (state, value) {
+        state.ManusData = value
     },
 }
 
@@ -27,12 +31,18 @@ const actions = {
     update_menuList ({commit}, value) {
         commit('UPDATE_MENULIST', value)
     },
-    update_modelid ({commit}, value) {
-        commit('UPDATE_MODELID', value)
+    update_dictionary ({commit}, value) {
+        commit('UPDATE_DICTIONARY', value)
     },
-    update_entitydata ({commit}, value) {
-        commit('UPDATE_ENTITYDATA', value)
+    update_specsdata ({commit}, value) {
+        commit('UPDATE_SPECSDATA', value)
+    },
+    update_manusdata ({commit}, value) {
+        commit('UPDATE_MANUSDATA', value)
     }
+    
+
+
 }
 
 export default {

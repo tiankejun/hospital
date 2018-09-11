@@ -15,7 +15,15 @@ export default {
         value: {
             type: String,
             default: ''
-        }
+        },
+        // fontSize: {
+        //     type: String,
+        //     default: '12'
+        // },
+        // lableWith: {
+        //     type: String,
+        //     default: 'auto'
+        // }
     },
     data () {
         return {

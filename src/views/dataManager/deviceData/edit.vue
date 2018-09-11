@@ -36,11 +36,6 @@ export default {
     components: {
         MyInput
     },
-    computed: {
-        // ...mapState('common', [
-        //     'entityData'
-        // ])
-    },
     data () {
         return {
             dialogVisible: false
@@ -63,7 +58,6 @@ export default {
             })
         },
         initPage () {
-            // this.formList = [...this.entity]
         },
         showDialog () {
             this.dialogVisible = true
@@ -99,6 +93,5 @@ export default {
     line-height: 40px;
     margin: 5px 0px;
 }
-
 </style>
 

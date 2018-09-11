@@ -4,7 +4,7 @@
         <el-row type="flex" :gutter="20" justify="space-around">
             <el-col :span="6" class="tabel-header">
                 <div class="selection header-top">
-                    <el-checkbox v-model="hiddenSameItem" @change="hiddenSameItemFn">隐藏相通相</el-checkbox>
+                    <el-checkbox v-model="hiddenSameItem" @change="hiddenSameItemFn">隐藏相同相</el-checkbox>
                 </div>
                 <div class="grid-content">
                     <el-collapse v-model="activeNames" v-for="(group, key, index) in colomTitle" :key="index" @change="handleChange">
