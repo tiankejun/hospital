@@ -19,18 +19,22 @@ export default {
             'Dictionary',
             'SpecsData',
             'ManusData',
+            'BaseUrl',
         ])
     },
     created() {
         this.getDictionary()
         this.getSpecs()
         this.getManus()
+        this.update_baseurl('http://101.231.40.243:42561/')
+        console.warn('BaseUrl', this.BaseUrl)
     },
     methods: {
         ...mapActions('common', [
             'update_dictionary',
             'update_specsdata',
             'update_manusdata',
+            'update_baseurl',
         ]),
         // 获取列数据对比下拉框字典值
         getDictionary () {

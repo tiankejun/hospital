@@ -16,6 +16,11 @@ module.exports = {
           changeOrigin: true,
           logLevel: 'debug'
       },
+      '/file_path': {
+          target: 'http://101.231.40.243:42561/file_path/',
+          changeOrigin: true,
+          logLevel: 'debug'
+      },
     },
 
     // Various Dev Server settings

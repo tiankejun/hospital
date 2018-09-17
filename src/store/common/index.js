@@ -5,6 +5,7 @@
  */
 
 const state = {
+    BaseUrl: '', // 暂未使用
     MenuList: [],
     Dictionary: [],
     SpecsData: [],
@@ -24,6 +25,9 @@ const mutations = {
     UPDATE_MANUSDATA (state, value) {
         state.ManusData = value
     },
+    UPDATE_BASEURL (state, value) {
+        state.BaseUrl = value
+    },
 }
 
 const actions = {
@@ -39,10 +43,10 @@ const actions = {
     },
     update_manusdata ({commit}, value) {
         commit('UPDATE_MANUSDATA', value)
+    },
+    update_baseurl ({commit}, value) {
+        commit('UPDATE_BASEURL', value)
     }
-    
-
-
 }
 
 export default {

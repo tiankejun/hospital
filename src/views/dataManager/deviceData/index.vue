@@ -1,6 +1,6 @@
 <template>
     <div class="device-data">
-        <h3 class="tital">设备列表</h3>
+        <h3 class="tital">设备信息管理</h3>
         <div class="panel-content">
             <el-table
                 :data="dataList"
@@ -122,16 +122,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.device-data {
-    padding-top: 5px;
-    overflow: auto;
-    background: #FFF;
-    .tital {
-        padding-left: 5px;
-        font-size: 16px;
-        text-align: left;
-        border-left: 5px solid #409EFF;
-    }
-}
+
 </style>
 

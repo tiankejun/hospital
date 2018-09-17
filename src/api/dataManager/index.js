@@ -52,7 +52,7 @@ export function GetManusAPI (param) {
  * @param  {Object} param 数据
  * @return {Object}       Promise
  */
-export function SaveData (param) {
+export function SaveDataAPI (param) {
     return axios.post('/nmr/api/manuspecmodel/save', param)
 }
 

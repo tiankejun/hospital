@@ -8,6 +8,9 @@
         <div class="right-main">
             <router-view/>
         </div>
+        <footer class="footer">
+            Copyright©上海琪翔羽信息科技有限公司. All right reserved.
+        </footer>
     </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
-    <div class="base-data">
-        <h3 class="tital">设备列表</h3>
+    <div class="device-data">
+        <h3 class="tital">基础数据管理</h3>
         <div class="panel-content">
             <el-table
                 :data="dataList"
@@ -42,7 +42,7 @@
                 layout="sizes, prev, pager, next"
                 :total="page.total">
             </el-pagination>
-            <add-or-edit ref="Edit" :title="title" :entity="entityData"></add-or-edit>
+            <add-or-edit ref="Edit" :title="title" :isAdd="isAdd" :entity="entityData"></add-or-edit>
         </div>
     </div>
 </template>
@@ -61,6 +61,7 @@ export default {
     data () {
          return {
             title: '',
+            isAdd: false,
             entityData: {},
             dataList: [],
             page: {
@@ -88,6 +89,7 @@ export default {
         },
         getDialogType (item, flag) {
             console.log(item, flag)
+            this.isAdd = flag
             this.title = flag ? '新增厂商信息' : '编辑厂商信息'
             this.entityData = item
             this.$refs.Edit.showDialog()
@@ -105,15 +107,5 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.device-data {
-    padding-top: 5px;
-    overflow: auto;
-    background: #FFF;
-    .tital {
-        padding-left: 5px;
-        font-size: 16px;
-        text-align: left;
-        border-left: 5px solid #409EFF;
-    }
-}
+
 </style>

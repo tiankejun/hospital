@@ -69,7 +69,8 @@ export default {
 </script>
 <style lang="less">
 .sideSystem-full { width: 200px;}
-.sideSystem-mini { width: 46px;}
+.sideSystem-mini { width: 64px;}
+.el-menu { border-right: none;}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
@@ -94,9 +95,9 @@ export default {
 }
 .side-bar {
     .full-logo { 
-        width: 100px; 
-        height: 54px;
-        margin: 40px auto; 
+        width: 120px; 
+        height: 120px;
+        margin: 20px auto; 
         background: url(../../../static/img/logo.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
@@ -104,7 +105,7 @@ export default {
     .small-logo { 
         width: 46px; 
         height: 46px; 
-        margin: 40px auto; 
+        margin: 20px auto; 
         background: indianred;
     }
     .switch {margin: 20px auto;}
