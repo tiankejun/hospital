@@ -1,5 +1,5 @@
 <template>
-    <div>首页</div>
+    <div class="home">欢迎试用核磁共振数据对比系统</div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
@@ -69,4 +69,16 @@ export default {
     }
 }
 </script>
+<style lang="less" scoped>
+.home {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+    padding-top: 50px;
+    font-size: 16px;
+    text-align: center;
+    color: #007ece;
+}
+</style>
 

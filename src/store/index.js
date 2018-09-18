@@ -6,6 +6,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createLogger from 'vuex/dist/logger'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -18,13 +19,13 @@ const actions = {}
 const modules = {
     common,
 }
-let debug = false
+let debug = true
 export default new Vuex.Store({
     state,
     getters,
     mutations,
     actions,
     modules,
-    plugins: debug ? [createLogger()] : [],
+    plugins: debug ? [createLogger(), createPersistedState()] : [],
     strict: true
 })

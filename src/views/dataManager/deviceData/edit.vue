@@ -4,7 +4,7 @@
     :before-close="closeDialog">
         <div class="device-wrap">
             <div class="form-data">
-                <div class="items" v-for="(item, index) in entity" :key="index">
+                <div class="items" v-for="(item, index) in deviceData" :key="index">
                     <MyInput :lable="item.title" v-model="item.val"/>
                 </div>
             </div>
@@ -38,12 +38,18 @@ export default {
     },
     data () {
         return {
-            dialogVisible: false
+            dialogVisible: false,
+            deviceData: []
         }
     },
+    // computed: {
+    //     deviceData () {
+    //         return this.entity
+    //     }
+    // },
     methods: {
         saveData () {
-            AddDataAPI(this.entity).then(res => {
+            AddDataAPI(this.deviceData).then(res => {
                 console.log(res.data)
                 if (res.data.code) {
                     this.$message({
@@ -58,12 +64,15 @@ export default {
             })
         },
         initPage () {
+            this.deviceData = []
+            this.deviceData = JSON.parse(JSON.stringify(this.entity))
         },
         showDialog () {
             this.dialogVisible = true
         },
         closeDialog () {
             this.$confirm('确认关闭？').then(_ => {
+                this.deviceData = []
                 this.dialogVisible = false
             }).catch(_ => {});
         }
@@ -81,7 +90,7 @@ export default {
 }
 .device-wrap {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     overflow: auto;
 }
 .form-data {
