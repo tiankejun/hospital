@@ -1,5 +1,5 @@
 <template>
-    <div class="home">欢迎试用核磁共振数据对比系统</div>
+    <div class="home">欢迎使用核磁共振数据对比系统</div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
