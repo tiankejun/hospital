@@ -34,7 +34,7 @@ let hideSameItem = function (list) {
         if (keys[0] === 'imgURL') {
             keys = keys.splice(1)
         }
-        // console.log('keys--', keys)
+        console.log('keys--', keys)
         keys.forEach(key => {
             let fields = colData[key].fields
             let fieldsKeys = Object.keys(fields)
@@ -65,7 +65,6 @@ let hideSameItem = function (list) {
             item.flag = judge(tempPath, list)
             return item
         })
-
         console.log('所有数据对应的路径--->', paths)
     }
     /**
@@ -75,7 +74,7 @@ let hideSameItem = function (list) {
      * @returns {Boolean} flag
      */
     function judge(path, list) {
-        let flag = true // 默认每一行数据都是相等
+        let flag = false // 默认每一行数据都是不相等
         let value = ''
         let field = ''
         // 先获取第一列的值，在循环获取其他列的值，拿第一列的值与下面的每一列进行比较，如果不相等，则返回false
@@ -118,7 +117,7 @@ let hideSameItem = function (list) {
         list.map(item => {
             paths.forEach(path => {
                 let value = getValueByPath(path.path, item)
-                value.isEqual = !path.flag
+                value.isEqual = path.flag
             })
             return item
         })
@@ -128,7 +127,7 @@ let hideSameItem = function (list) {
 let resetList = function (list) {
     list.forEach(item => {
         for (let key in item) {
-            let fields = item[key].fields
+            let fields = item[key] && item[key].fields
             for (let field in fields) {
                 fields[field].isEqual = true
              }

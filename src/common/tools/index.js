@@ -86,7 +86,7 @@ let hideSameItem = function (list) {
                 } else if (value !== field.value) {
                     flag = false
                 }
-            }
+            } 
         })
         return flag
     }
@@ -138,7 +138,7 @@ let hideSameItem = function (list) {
 let resetList = function (list) {
     list.forEach(item => {
         for (let key in item) {
-            let fields = item[key].fields
+            let fields = item[key] && item[key].fields
             for (let field in fields) {
                 fields[field].isEqual = true
              }

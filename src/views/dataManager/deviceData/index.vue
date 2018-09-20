@@ -2,6 +2,9 @@
     <div class="device-data">
         <h3 class="tital">设备信息管理</h3>
         <div class="panel-content">
+            <!-- <div class="buttons">
+                <el-button @click="getDialogType" size="small" >添加</el-button>
+            </div> -->
             <el-table
                 :data="dataList"
                 style="width: 100%">
@@ -27,7 +30,7 @@
                 width="120">
                 <template slot-scope="scope">
                     <el-button @click="getDialogType(scope.row, false)" type="text" size="small">编辑</el-button>
-                    <el-button @click="getDialogType(scope.row, true)" type="text" size="small" >添加</el-button>
+                    <!-- <el-button @click="getDialogType(scope.row, true)" type="text" size="small" >添加</el-button> -->
                 </template>
                 </el-table-column>
             </el-table>
@@ -88,7 +91,8 @@ export default {
             })
         },
         getDialogType (item, flag) {
-            console.log(item, flag)
+            // console.log(item, flag)
+            let id = item && item.id || ''
             this.title = flag ? '新增设备信息' : '编辑设备信息'
             this.getModleData(item.id)
         },

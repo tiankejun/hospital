@@ -4,7 +4,7 @@
         <el-row type="flex" :gutter="20" justify="space-around">
             <el-col :span="6" class="tabel-header">
                 <div class="selection header-top">
-                    <el-checkbox v-model="hiddenSameItem" @change="hiddenSameItemFn">隐藏相同相</el-checkbox>
+                    <el-checkbox v-model="hiddenSameItem" @change="hiddenSameItemFn">隐藏相同项</el-checkbox>
                 </div>
                 <div class="grid-content">
                     <el-collapse v-model="activeNames" v-for="(group, key, index) in colomTitle" :key="index" @change="handleChange">
@@ -19,6 +19,7 @@
             <el-col :span="6" v-for="(colData, colIndex) in colomData" :key="colIndex">
                 <!-- :imgURL="colData.imgURL"  -->
                 <Selection :colIndex="colIndex" 
+                    :imgURL="colData.imgURL"
                     :selectOption="selectOption" 
                     :selectedValue="selectedValue[colIndex]"  
                     @getParams="getParams" 
@@ -125,8 +126,19 @@ export default {
         // 隐藏咧
         hiddenSameItemFn (flag) {
             this.hiddenSameItem = flag
+            let columNum = 0  // 记录选择了几列数据
             if (this.hiddenSameItem ) {
-                this.colomData = this.$tools.hideSameItem(this.colomData)
+                this.selectedValue.forEach(item => {
+                    if (item[0]) {
+                        columNum += 1
+                    }
+                })
+                if (columNum > 1) {
+                    this.colomData = this.$tools.hideSameItem(this.colomData)
+                } else {
+                    this.hiddenSameItem = !this.hiddenSameItem
+                    this.$message.warning('单列数据不能对比同类项！')
+                }
             } else {
                 this.colomData = this.$tools.resetList(this.colomData)
             }

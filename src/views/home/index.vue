@@ -76,9 +76,9 @@ export default {
     justify-content: center;
     flex: 1;
     padding-top: 50px;
-    font-size: 16px;
+    font-size: 24px;
     text-align: center;
-    color: #007ece;
+    color: rgb(64, 158, 255);
 }
 </style>
 

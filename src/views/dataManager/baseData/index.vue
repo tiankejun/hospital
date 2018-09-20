@@ -2,6 +2,9 @@
     <div class="device-data">
         <h3 class="tital">基础数据管理</h3>
         <div class="panel-content">
+            <div class="buttons">
+                <el-button @click="getDialogType('', true)" size="small" >新增</el-button>
+            </div>
             <el-table
                 :data="dataList"
                 style="width: 100%">
@@ -27,7 +30,7 @@
                 width="120">
                 <template slot-scope="scope">
                     <el-button @click="getDialogType(scope.row, false)" type="text" size="small">编辑</el-button>
-                    <el-button @click="getDialogType(scope.row, true)" type="text" size="small" >添加</el-button>
+                    <!-- <el-button @click="getDialogType(scope.row, true)" type="text" size="small" >新增</el-button> -->
                 </template>
                 </el-table-column>
             </el-table>
@@ -91,7 +94,7 @@ export default {
             console.log(item, flag)
             this.isAdd = flag
             this.title = flag ? '新增厂商信息' : '编辑厂商信息'
-            this.entityData = item
+            this.entityData = item || {}
             this.$refs.Edit.showDialog()
         },
         sizeChange (pageSize) {

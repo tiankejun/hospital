@@ -26,6 +26,11 @@ export default {
         text-align: left;
         border-left: 5px solid #409EFF;
     }
+    .panel-content {
+        .buttons {
+            text-align: right;
+        }
+    }
 }
 </style>
 

@@ -49,7 +49,7 @@
                     :on-error="uploadError">
                     <img v-if="params.model.imageUrl" :src="params.model.imageUrl" class="avatar">
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                    <div class="el-upload__tip" slot="tip">只能上传jpg或png文件，且不超过2兆(M)</div>
+                    <div class="el-upload__tip" slot="tip">只能上传jpg文件，且不超过2兆(M)</div>
                 </el-upload>
             </div>
         </div>
@@ -161,7 +161,6 @@ export default {
         },
         saveData () {
             if (this.isAdd) {
-                debugger
                 if (!this.params.manu.name) {
                     this.$message.warning('厂商信息不能为空！')
                     return
@@ -208,7 +207,6 @@ export default {
         },
         // 上传成功
         uploadSuccess(res, file) {
-            debugger
             // this.imageUrl = URL.createObjectURL(file.raw);
             if (res.code === 1) {
                 // 文件上传成功 this.BaseUrl +
