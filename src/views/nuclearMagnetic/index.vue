@@ -183,6 +183,9 @@ export default {
             let index = optionInfo.index
             // 如果有值，则改变原数据， 否则，赋值为默认值
             if (data.length) {
+                // 重置数组
+                this.nameArry = []
+                // 获取title
                 this.getNameByList(this.selectOption, data)
                 let modelId = data[2]
                 // 替换当前选择下拉框的值，index 为当前列索引
@@ -221,8 +224,7 @@ export default {
 <style lang="less">
 .magnetic{
     flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
+    margin-left: 10px;
     .title {
         padding-left: 30px;
         font-size: 14px;

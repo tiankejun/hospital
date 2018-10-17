@@ -39,7 +39,8 @@
             "RFconverter": "每个模数转换器采样频率（MHz)",
             "AloneLaunch": "独立发射通道数（放大器输出端）",
             "RFKW": "射频发射功率(kW)",
-            "CoolingSys": "冷却系统"
+            "CoolingSys": "冷却系统",
+            "GradientSys": "最大承重量"
         }
     },
     "GradientSYS": {
@@ -54,7 +55,6 @@
             "AxisY2": "Y轴",
             "AxisZ2": "Z轴",
             "DutyCycle": "占空比",
-			"TdxtLqxt": "冷却系统",
             "DynamicHighChannel": "动态高阶匀场通道数"
         }
     },
@@ -92,10 +92,12 @@
             "MonitorType": "显示器类型",
             "ResolvingPower": "分辨率",
             "RFCoil": "射频线圈",
+            "RFBuiltIn": "内置射频发射线圈",
             "Name1": "名称",
             "LaunchChannels": "发射通道数量",
             "ReceivingUnits1": "接收单元数量",
             "ReceivingChannels1": "接收通道数量",
+
             "HeadCoil": "头线圈",
             "Name2": "显示器类型",
             "OutSize1": "尺寸（外径）",

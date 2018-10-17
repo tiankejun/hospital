@@ -4,7 +4,7 @@
             <span class="arrow" @click="arrowHandler('left')">&lt;&lt;</span>
         </div>
         <div class="center">
-            <img class="brand-img" :src="imgUrl">
+            <img class="brand-img" :src="resultUrl">
             <a class="titleName" href="javascript:;" :title="currentName">
                 <el-cascader
                     class="cascader"
@@ -53,7 +53,7 @@ export default {
         }
     },
     computed: {
-        imgUrl () {
+        resultUrl () {
             return this.imgURL
         },
         values: {
@@ -116,8 +116,8 @@ export default {
     .brand-img {
         display: block;
         // width: 90%;
-        max-height: 150px;
-        max-width: 150px;
+        height: 150px;
+        width: 150px;
         margin: 0 auto;
         margin-bottom: 10px;
     }
