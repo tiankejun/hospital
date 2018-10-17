@@ -5,14 +5,16 @@
         </div>
         <div class="center">
             <img class="brand-img" :src="imgUrl">
-            <el-cascader
-                class="cascader"
-                expand-trigger="hover"
-                clearable
-                :options="selectOption"
-                v-model="values"
-                @change="getParamter">
-            </el-cascader>
+            <a class="titleName" href="javascript:;" :title="currentName">
+                <el-cascader
+                    class="cascader"
+                    expand-trigger="hover"
+                    clearable
+                    :options="selectOption"
+                    v-model="values"
+                    @change="getParamter">
+                </el-cascader>
+            </a>
         </div>
         <div class="slide">
             <span class="arrow" @click="arrowHandler('right')">&gt;&gt;</span>
@@ -39,6 +41,10 @@ export default {
             default () {
                 return []
             }
+        },
+        currentName: {
+            type: String,
+            default: ''
         }
     },
     data () {
@@ -103,10 +109,15 @@ export default {
     .center {
         flex: 1;
     }
+    .titleName {
+        display: block;
+        width: 100%;
+    }
     .brand-img {
         display: block;
-        width: 90%;
+        // width: 90%;
         max-height: 150px;
+        max-width: 150px;
         margin: 0 auto;
         margin-bottom: 10px;
     }

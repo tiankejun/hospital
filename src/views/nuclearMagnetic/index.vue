@@ -21,6 +21,7 @@
                 <Selection :colIndex="colIndex" 
                     :imgURL="colData.imgURL"
                     :selectOption="selectOption" 
+                    :currentName="titleName"
                     :selectedValue="selectedValue[colIndex]"  
                     @getParams="getParams" 
                     @moveData="moveData"/>
@@ -54,6 +55,8 @@ export default {
         return {
             colomData: [],  // 列数据
             colomTitle: [], // 列名
+            nameArry: [], // title
+            nameIndex: 0,
             selectedValue: [
                 ['', '', ''],
                 ['', '', ''],
@@ -68,6 +71,9 @@ export default {
         }
     },
     computed: {
+        titleName () {
+            return this.nameArry.join('/')
+        },
         selectOption () {
             let data = localStorage.getItem('Dictionary')
             data = JSON.parse(localStorage.getItem('Dictionary')) || []
@@ -177,6 +183,7 @@ export default {
             let index = optionInfo.index
             // 如果有值，则改变原数据， 否则，赋值为默认值
             if (data.length) {
+                this.getNameByList(this.selectOption, data)
                 let modelId = data[2]
                 // 替换当前选择下拉框的值，index 为当前列索引
                 this.selectedValue.splice(index, 1, data)
@@ -186,6 +193,22 @@ export default {
                 // 删除后赋默认数据
                 this.colomData.splice(index, 1, this.tempData)
                 this.selectedValue.splice(index, 1, ['', '', ''])
+            }
+        },
+        getNameByList (list, data) {
+            if (list.length && data.length) {
+                list.map(item => {
+                    let key = data[this.nameIndex]
+                    if (item.value === key) {
+                        this.nameArry.push(item.label)
+                        if (item.children && item.children.length) {
+                            this.nameIndex++
+                            this.getNameByList(item.children, data)
+                        } else {
+                            this.nameIndex = 0
+                        }
+                    }
+                })
             }
         },
         // 收起，展开功能
